@@ -66,13 +66,13 @@
               Voir les membres du projet
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="btn cursor-pointer dropdown-item" data-toggle="modal" data-target="#showdiedhiouModal"
+              <a class="btn cursor-pointer dropdown-item" id="introMemberDiedhiou" data-toggle="modal" data-target="#showdiedhiouModal"
               >Thierno DIEDHIOU
             </a>
-            <a class="btn dropdown-item" data-toggle="modal" data-target="#showMohamedModal"
+            <a class="btn dropdown-item" id="introMemberMohamed" data-toggle="modal" data-target="#showMohamedModal"
              >Mohamed NDOYE
               </a>
-                <a class="btn dropdown-item" data-toggle="modal" data-target="#showLaityModal"
+                <a class="btn dropdown-item" id="introMemberLaity" data-toggle="modal" data-target="#showLaityModal"
                 >Laity FAYE
                 </a>
             </div>
@@ -293,7 +293,7 @@
       <div class="modal-body" id="modalBody">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>
@@ -307,27 +307,30 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       
-      <div class="modal-body">
+      <div class="modal-body" style='background-image: url(static/items.jpg)'>
         <!-- display an avatar image for a person and display his name at the bottom, the image and the name centered in the middle
           -->
-          <div class="container">
+          <div class="container" >
             <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                    <img src="https://avatars.githubusercontent.com/u/43131994?v=4" 
+                    <img src="{{url_for('static', filename='mohamed.jpg')}}" 
                          class="rounded-circle" 
-                         alt="Jule Fery" 
-                         width="200" 
-                         height="200">
+                         alt="Photo Mohamed NDOYE" 
+                         width="200"
+                         style="aspect-ratio: 1/1; object-fit: cover;"
+                         >
                 </div>
                 <div class="col-12">
-                    <h5 class="text-center">Mohamed NDOYE</h5>
-                    <h5 class="text-center">Etudiant en Master 2 Génie Logiciel</h5>
+                  <!-- <div class="card card-body p-3 w-min-content"> -->
+                    <span class="text-center w-100 badge badge-primary">Mohamed NDOYE</span>
+                    <span class="text-center w-100 d-block badge badge-primary">Etudiant en Master 2 Génie Logiciel</span>
+                  <!-- </div> -->
                 </div>
             </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>
@@ -339,27 +342,27 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       
-      <div class="modal-body">
+      <div class="modal-body" style='background-image: url(static/items.jpg)'>
         <!-- display an avatar image for a person and display his name at the bottom, the image and the name centered in the middle
           -->
           <div class="container">
             <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                    <img src="https://avatars.githubusercontent.com/u/43131994?v=4" 
+                    <img src="{{url_for('static', filename='/laity.jpg')}}" 
                          class="rounded-circle" 
                          alt="Jule Fery" 
                          width="200" 
                          height="200">
                 </div>
                 <div class="col-12">
-                    <h5 class="text-center">Laity FAYE</h5>
-                    <h5 class="text-center">Etudiant en Master 2 Génie Logiciel</h5>
+                    <span class="text-center w-100 badge badge-primary">Laity FAYE</span>
+                    <span class="text-center w-100 badge badge-primary">Etudiant en Master 2 Génie Logiciel</span>
                 </div>
             </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>
@@ -372,33 +375,42 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       
-      <div class="modal-body">
+      <div class="modal-body" style='background-image: url(static/items.jpg)'>
         <!-- display an avatar image for a person and display his name at the bottom, the image and the name centered in the middle
           -->
           <div class="container">
             <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                    <img src="https://avatars.githubusercontent.com/u/43131994?v=4" 
+                    <img src="{{url_for('static', filename='diedhiou.webp')}}" 
                          class="rounded-circle" 
                          alt="Jule Fery" 
-                         width="200" 
-                         height="200">
+                         width="200">
                 </div>
                 <div class="col-12">
-                    <h5 class="text-center mb-2">Thierno DIEDHIOU</h5>
-                    <h5 class="text-center">Etudiant en Master 2 Génie Logiciel</h5>
+                    <span class="text-center text-1 w-100 badge badge-primary">Thierno DIEDHIOU</span>
+                    <span class="text-center w-100 badge badge-primary">Etudiant en Master 2 Génie Logiciel</span>
                 </div>
             </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>
 </div>
- <!-- End Diedhiou modal -->
+<audio id="modalSound" src="static/notif.mp3" preload="auto"></audio>
       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+        var modalSound = document.getElementById('modalSound');
+        var modalIds = ['introMemberLaity', 'introMemberMohamed', 'introMemberDiedhiou'];
+        
+        modalIds.forEach(function(id) {
+          document.getElementById(id).addEventListener('click', function(){
+            modalSound.play();
+          })
+        });
+      });
         var successData = null;
         errorAlert = document.querySelector('.error_alert');
         errorResult = document.getElementById('errorResult');
