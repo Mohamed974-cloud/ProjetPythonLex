@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Résultats de l'Analyse</title>
+  </head>
+  <body>
+    <h1>Résultats de l'Analyse</h1>
+    <h2>Solde Initial: {{ result.solde_initial }}</h2>
+    <h2>Solde Final: {{ result.solde_final }}</h2>
+    <h3>Transactions:</h3>
+    <ul>
+      {% for key, transactions in result.transactions.items() %}
+      <li>
+        {{ key }}:
+        <ul>
+          {% for transaction in transactions %}
+          <li>
+            {{ transaction.transaction }} ({{ transaction.type }}) - Solde
+            restant: {{ transaction.solde_restant }}
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="/">Retour</a>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+import { useEffect } from "react";
+import { Card } from "antd";
+import { NavLink } from "react-router-dom";
+import {
+  ExclamationCircleOutlined,
+  TagsOutlined,
+  CheckCircleOutlined,
+  AppstoreAddOutlined,
+} from "@ant-design/icons"; // Import des icônes
+import styles from "./ParametragePage.module.scss";
+import { useUserContext } from "../contexts/UserContext";
+import Main from "../components/layouts/Main";
+import Breadcrumb from "../components/utils/Breadcrumb";
+import PageTitle from "../components/utils/PageTitle";
+
+export default function ParametragePage() {
+  const { check } = useUserContext();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll vers le haut de la page
+  }, []);
+
+  const items = [
+   {
+      title: "Priorités",
+      link: "/priorite",
+      description:
+        "Définissez et organisez les priorités pour vos affaires et tâches, afin de mieux gérer les urgences et l'importance des éléments de votre projet.",
+      icon: <ExclamationCircleOutlined className={styles.icon} />,
+    },
+    {
+      title: "Statuts",
+      link: "/statut",
+      description:
+        "Créez et gérez les statuts qui représentent l'état actuel des affaires et taches, comme 'En cours', 'Terminé' ou 'En attente', pour suivre efficacement leur avancement.",
+      icon: <TagsOutlined className={styles.icon} />,
+    },
+    {
+      title: "Étapes",
+      link: "/etape",
+      description:
+        "Configurez les étapes importantes de votre processus, permettant de structurer vos flux de travail en phases claires et organisées.",
+      icon: <CheckCircleOutlined className={styles.icon} />,
+    },
+    {
+      title: "Modèles",
+      link: "/modele",
+      description:
+        "Gérez des modèles réutilisables pour standardiser la création de nouvelles affaires ou tâches, en appliquant des configurations prédéfinies. Ces modèles seront associés à des étapes.",
+      icon: <AppstoreAddOutlined className={styles.icon} />,
+    },
+    {
+      title: "Monnaies",
+      link: "/monnaie",
+      description:
+        "Définissez les monnaies utilisées dans votre application, la monnaie par défaut sera utilisée pour les montants.",
+      icon: <AppstoreAddOutlined className={styles.icon} />,
+    }
+  ];
+
+  return (
+    <Main>
+      <Breadcrumb
+        parentLink="/"
+        canSee={check("VIEW-DASHBOARD")}
+        parentLinkTitle="Accueil"
+        title="Paramétrage"
+      />
+      <PageTitle
+        title="Paramétrage"
+        subTitle="Gérez les priorités, statuts, étapes et modèles"
+      />
+      <div className={styles.listContainer}>
+        {items.filter(item => item).map((item, index) => (
+          <NavLink to={item.link} key={index} className={styles.itemLink}>
+            <Card hoverable className={styles.itemCard}>
+              <div className={styles.cardHeader}>
+                {item.icon}
+                <h3 className={styles.itemTitle}>{item.title}</h3>
+              </div>
+              <p className={styles.itemDescription}>{item.description}</p>
+            </Card>
+          </NavLink>
+        ))}
+      </div>
+    </Main>
+  );
+}
+

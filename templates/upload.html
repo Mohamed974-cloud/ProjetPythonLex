@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BankLexer</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <meta name="description" content="Analyser et obtenir les résultats de vos transactions bancaires" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous" />
+      
+  </head>
+  <body>
+
+    <div class="container px-4 mt-3 mb-3">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="http://localhost:5000/">BankLexer</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="http://localhost:5000/">Accueil <span
+                  class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+                href="http://localhost:5000/success-transaction">Transactions
+                réuissies </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                Mes Analyses
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item"
+                  href="http://localhost:5000/success-transaction">Analyses
+                  réussies</a>
+                <a class="dropdown-item"
+                  href="http://localhost:5000/error-transaction">Analyse
+                  échouées</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+                href="http://localhost:5000/error-transaction">Transaction
+                échouées</a>
+            </li>
+          </ul>
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+              role="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              Voir les membres du projet
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="btn cursor-pointer dropdown-item" data-toggle="modal" data-target="#showdiedhiouModal"
+              >Thierno DIEDHIOU
+            </a>
+            <a class="btn dropdown-item" data-toggle="modal" data-target="#showMohamedModal"
+             >Mohamed NDOYE
+              </a>
+                <a class="btn dropdown-item" data-toggle="modal" data-target="#showLaityModal"
+                >Laity FAYE
+                </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="nav">
+        <div class="card w-100 p-2 mt-3 mb-3">
+          <div><h2 class="text-primary">Transactions bancaire</h2></div>
+          <small class="text-secondary">Analyser et obtenir les résultats de vos
+            transactions</small>
+        </div>
+      </div>
+      {% if result and result[0] and result[0].result == 'error' %}
+      <div class="alert error_alert alert-danger alert-dismissible fade show"
+        role="alert">
+        <button type="button" class="close" data-dismiss="alert"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong id="errorResult"></strong>
+      </div>
+
+      <script>
+        $(".alert").alert();
+      </script>
+
+      {% endif %}
+
+      <div class="card card-body mt-3 mb-3 bg-light">
+        <div class="container">
+
+          <h5 class="card-title
+             ">Statistiques des transactions</h5>
+          <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-12 mt-3">
+                    <button type="default" disabled
+                      class="text-left btn btn-primary">Nombre
+                      d'analyse effectuées: <span
+                        class="badge badge-light" id="testSum">calcul en
+                        cours...</span></button>
+                  </div>
+                  <div class="col-12 mt-3">
+                    <button type="default" disabled
+                      class="text-left  btn btn-primary">Nombre
+                      d'analyse de transactions réussies: <span
+                        class="badge badge-light" id="successTransaction">calcul
+                        en cours...</span></button>
+                  </div>
+                  <div class="col-12 mt-3">
+                    <button type="default" disabled
+                      class="text-left  btn btn-primary">Nombre
+                      d'analyse de transactions échouées: <span
+                        class="badge badge-light" id="failedTransaction">calcul
+                        en cours...</span></button>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="container">
+                  <form action="{{ url_for('main.upload_transaction_file') }}"
+                    enctype="multipart/form-data"
+                    method="POST">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group">
+                          <div class="form-group">
+                            <label for="exampleFormControlInput1">
+                              Donner votre nom
+                            </label>
+                            <input type="text" class="form-control"
+                              id="exampleFormControlInput1" name="name"
+                              placeholder="Exemple: Jule Fery">
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <h5 class="card-title">Soumettre un fichier de
+                          transactions</h5>
+                        <div class="form-group">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"
+                                id="inputGroupFileAddon01">Joindre</span>
+                            </div>
+                            <div class="custom-file">
+                              <input
+                                type="file"
+                                required
+                                class="custom-file-input form-control"
+                                id="inputGroupFile01"
+                                name="file"
+                                aria-describedby="inputGroupFileAddon01"
+                                onchange="updateFileName(this)" />
+                              <label class="custom-file-label"
+                                for="inputGroupFile01">Choisir un fichier
+                                texte</label>
+                            </div>
+                          </div>
+                          <span id="bank_file" class></span>
+
+                        </div>
+
+                      </div>
+                      <div class="col-12">
+                        {% if response %}
+                        <div
+                          class="alert alert-danger alert-dismissible fade show"
+                          role="alert">
+                          <strong>Erreur!</strong> {{response}}
+                          <button type="button" class="close"
+                            data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        {% endif %}
+                      </div>
+
+                      <div class="col-12">
+                        <button type="submit" id="submitButton"
+                          disabled={{false}} onclick="showValueInConsole(this)"
+                          class="btn btn-primary">Analyser
+                          les transactions</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      {% if(result and result[0] and result[0].result == 'success')%}
+      <div class="card card-body p-1 my-4 ">
+        <div class="container">
+          <div class="row w-100">
+            <div class="col-4">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Filtrer les
+                  transactions</label>
+                <select class="form-control" value="Tous"
+                  id="exampleFormControlSelect1">
+                  <option value="tout">Tous</option>
+                  <option value="credit">Cr&eacute;dit</option>
+                  <option value="debit">D&eacute;bit</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-8">
+              <div
+                class="card bg-info h-100 display-flex align-items-center justify-content-end flex-row">
+                <div class="container">
+                  <div class="row display-flex flex-row justify-content-end">
+                    <div class="px-1 mx-2">
+                      <button type="button" class="text-xs btn btn-block btn-light"
+                        onclick="exportDataToJson()">Exporter en
+                        JSON
+                      </button>
+
+                    </div>
+                    <div class="px-1 mx-2">
+                      <button type="button" class="btn btn-block btn-light"
+                        onclick="exportDataToCsv()">Exporter en CSV
+                      </button>
+                    </div>
+                    <div class="px-1 mx-2">
+                      <button type="button" onclick="showPlainTextResult()" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-ligth bg-light float-right">Afficher en texte clair</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="card w-100 p-2 bg-light">
+        <caption><p>{% if(result)%} {% if(result[1].name) %} Resultats sur la
+            fiche
+            de transaction de <span class="text-success">{{result[1].name}}
+            </span> {% endif %} {% endif %}</p></caption>
+        {% if(result) %}
+        {% if(result[0]) %}
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar" aria-valuenow="0" aria-valuemin="0"
+            aria-valuemax="100"></div>
+        </div>
+        {% endif %}
+        {% endif %}
+        <table class="table table-white table-striped">
+          <thead>
+            <tr>
+              <th>Type de Transaction</th>
+              <th>Transaction</th>
+              <th>Type</th>
+              <th>Solde Restant</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="modalBody">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal Mohamed info -->
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="showMohamedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        <!-- display an avatar image for a person and display his name at the bottom, the image and the name centered in the middle
+          -->
+          <div class="container">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <img src="https://avatars.githubusercontent.com/u/43131994?v=4" 
+                         class="rounded-circle" 
+                         alt="Jule Fery" 
+                         width="200" 
+                         height="200">
+                </div>
+                <div class="col-12">
+                    <h5 class="text-center">Mohamed NDOYE</h5>
+                    <h5 class="text-center">Etudiant en Master 2 Génie Logiciel</h5>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal mohamed info-->
+
+<!-- Modal Laity -->
+<div class="modal fade" id="showLaityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        <!-- display an avatar image for a person and display his name at the bottom, the image and the name centered in the middle
+          -->
+          <div class="container">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <img src="https://avatars.githubusercontent.com/u/43131994?v=4" 
+                         class="rounded-circle" 
+                         alt="Jule Fery" 
+                         width="200" 
+                         height="200">
+                </div>
+                <div class="col-12">
+                    <h5 class="text-center">Laity FAYE</h5>
+                    <h5 class="text-center">Etudiant en Master 2 Génie Logiciel</h5>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- End Modal Laity -->
+
+
+<!-- Modal Laity -->
+<div class="modal fade" id="showdiedhiouModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        <!-- display an avatar image for a person and display his name at the bottom, the image and the name centered in the middle
+          -->
+          <div class="container">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <img src="https://avatars.githubusercontent.com/u/43131994?v=4" 
+                         class="rounded-circle" 
+                         alt="Jule Fery" 
+                         width="200" 
+                         height="200">
+                </div>
+                <div class="col-12">
+                    <h5 class="text-center mb-2">Thierno DIEDHIOU</h5>
+                    <h5 class="text-center">Etudiant en Master 2 Génie Logiciel</h5>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- End Diedhiou modal -->
+      <script>
+        var successData = null;
+        errorAlert = document.querySelector('.error_alert');
+        errorResult = document.getElementById('errorResult');
+        selectFilter = document.getElementById('exampleFormControlSelect1');
+        if(selectFilter != null){
+          selectFilter.addEventListener('change', (event)=>filterTransaction(event.target.value, successData));
+        }
+        if(errorAlert !=null){
+          errorAlert.style.display = "none";
+        }
+        var width = 0;
+        if ("{{ result}}"){ 
+          result = JSON.parse('{{ result | tojson | safe }}')
+          if (result.length > 0 && result[0] && result[0].result=='success'){
+            new Promise((resolve, reject) => {
+
+              progress = document.querySelector('.progress-bar');
+              const interval = setInterval(() => {
+                width += 10;
+                progress.style.width = `${width}%`;
+                progress.innerHTML = `${width}%`;
+                console.log("width before clear: ", width);
+                if (width >= 100) {
+                  clearInterval(interval);
+                  resolve();
+                 }
+               }, 50);
+               
+
+            }).then(() => {
+              fetch('http://localhost:5000/resultat_transactions.json')
+              .then(response => response.json())
+              .then(data => {
+                successData = data;
+                const tableBody = document.querySelector('.table tbody');
+                // Solde initial
+                const soldeInitial = successData.solde_initial;
+
+                // Afficher le solde initial
+                const initialRow = document.createElement('tr');
+                initialRow.innerHTML = `
+                  <td colspan="4" style="font-weight: bold;">Solde initial : ${soldeInitial.toFixed(2)}</td>
+                `;
+                tableBody.appendChild(initialRow);
+
+                // Parcourir chaque groupe de transactions
+                Object.entries(successData.transactions).forEach(([transactionType, transactionList]) => {
+                  // Ajouter une ligne pour séparer chaque groupe
+                  const groupRow = document.createElement('tr');
+                  groupRow.innerHTML = `<td colspan="4" class="text-primary" style="font-style: italic;">${transactionType}</td>`;
+                  tableBody.appendChild(groupRow);
+
+                  // Ajouter chaque transaction dans le tableau
+                  transactionList.forEach(transaction => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                      <td>${transactionType}</td>
+                      <td class="${transaction.type=="debit"?"text-success":"text-danger"}">${transaction.transaction}</td>
+                      <td>${transaction.type}</td>
+                      <td>${transaction.solde_restant.toFixed(2)}</td>
+                    `;
+                    tableBody.appendChild(row);
+                  });
+                });
+              }).catch(error=>console.error('Erreur:', error));
+              
+            });
+            
+          } 
+          if(result.length > 0 && result[0] && result[0].result=='error'){
+            fetch('http://localhost:5000/error_lex.json')
+            .then(response => response.json())
+            .then(data => {
+              if("message" in data){
+                errorResult.innerHTML = data.message;
+                 errorAlert.style.display = "block";
+              }else{
+                errorResult.innerHTML = "Erreur rencontré dans la ligne numéro "+data.lineNumber+ "<br>Caractère inconnu: "+"\""+data.value+"\"<br> Ligne entière:"+ "\""+data.line+"\"";
+                errorAlert.style.display = "block";
+              }
+
+            })
+
+          }
+        }
+        console.log("width: after clear", width);
+        submitButton = document.getElementById('submitButton');
+        document.getElementById('inputGroupFile01').addEventListener('change', (event)=>updateFileName(event.target));
+        function updateFileName(chosenFile){
+          const file = chosenFile.files[0];
+          console.log(file);
+        const allowedTypes = ['text/plain'];
+        const bankFileSpan = document.getElementById('bank_file');
+        if (file && allowedTypes.includes(file.type)) {
+            bankFileSpan.innerHTML = file.name;
+             bankFileSpan.classList.add(...['badge', 'badge-success', 'p-2']);
+          bankFileSpan.classList.remove('text-danger');
+            submitButton.disabled = false;
+        } else {
+          submitButton.disabled = true;
+          bankFileSpan.classList.remove(['badge','badge-success', 'p-2']);
+          bankFileSpan.classList.add('text-danger');
+            bankFileSpan.innerHTML = 'Type de fichier inconnu, seul les fichiers (.txt) sont permis.';
+            this.value = ''; // Reset the input
+        }
+        }
+        const  modalBody = document.getElementById("modalBody");
+        // const triggerModal = document.onclick="showPlainTextResult()"addEventListener("onclick", showPlainTextResult)
+        function showPlainTextResult(){
+          let transactions = this.successData;
+          let result = `Solde initial : ${transactions.solde_initial.toFixed(2).replace('.', ',')}\n`;
+            let currentBalance = transactions.solde_initial;
+
+            for (const [group, transList] of Object.entries(transactions.transactions)) {
+                for (const trans of transList) {
+                    const value = trans.transaction.replace('.', ',');
+                    const comment = trans.comment ? `   #${trans.comment}` : "";
+                    result += `${value}${comment}\n`;
+                    currentBalance = trans.solde_restant.toFixed(2).replace('.', ',');
+                }
+                // Ajouter le solde intermédiaire après chaque groupe
+                result += `-----------------\n= ${currentBalance}\n\n`;
+            }
+
+
+            // Afficher le résultat dans l'élément HTML
+            modalBody.innerHTML = `<pre>${result}</pre>`;
+            console.log(result);
+        }
+        function filterTransaction(value, data) {
+          const tableBody = document.querySelector('.table tbody');
+          tableBody.innerHTML = ''; // Clear existing rows
+
+          // Solde initial
+          const soldeInitial = data.solde_initial;
+
+          // Afficher le solde initial
+          const initialRow = document.createElement('tr');
+          initialRow.innerHTML = `
+            <td colspan="4" style="font-weight: bold;">Solde initial : ${soldeInitial.toFixed(2)}</td>
+          `;
+          tableBody.appendChild(initialRow);
+
+          // Parcourir chaque groupe de transactions
+          Object.entries(data.transactions).forEach(([transactionType, transactionList]) => {
+            // Ajouter une ligne pour séparer chaque groupe
+            const groupRow = document.createElement('tr');
+            groupRow.innerHTML = `<td colspan="4" class="text-primary" style="font-style: italic;">${transactionType}</td>`;
+            tableBody.appendChild(groupRow);
+
+            // Filtrer les transactions en fonction de la valeur sélectionnée
+            const filteredTransactions = transactionList.filter(transaction => {
+              if (value === 'tout') return true;
+              return transaction.type === value;
+            });
+
+            // Ajouter chaque transaction filtrée dans le tableau
+            filteredTransactions.forEach(transaction => {
+              const row = document.createElement('tr');
+              row.innerHTML = `
+              <td>${transactionType}</td>
+              <td class="${transaction.type === "credit" ? "text-success" : "text-danger"}">${transaction.transaction}</td>
+              <td>${transaction.type}</td>
+              <td>${transaction.solde_restant.toFixed(2)}</td>
+              `;
+              tableBody.appendChild(row);
+            });
+          });
+        }
+
+        function exportDataToJson(){
+          const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(successData));
+          const downloadAnchorNode = document.createElement('a');
+          downloadAnchorNode.setAttribute("href", dataStr);
+          downloadAnchorNode.setAttribute("download", "resultat_transactions.json");
+          document.body.appendChild(downloadAnchorNode); // required for firefox
+          downloadAnchorNode.click();
+          downloadAnchorNode.remove();
+
+        }
+
+        function exportDataToCsv() {
+          if (!successData || !successData.solde_initial || !successData.transactions) {
+            console.error("Les données ne sont pas valides !");
+            return;
+          }
+
+          // Construire l'en-tête CSV
+          const headers = ["Transaction Group", "Transaction", "Type", "Solde Restant"];
+          const rows = [];
+
+          // Ajouter le solde initial
+          rows.push(["Solde initial", "", "", successData.solde_initial]);
+
+          // Parcourir les transactions
+          Object.entries(successData.transactions).forEach(([group, transactions]) => {
+            transactions.forEach(transaction => {
+              rows.push([
+                group,
+                transaction.transaction,
+                transaction.type,
+                transaction.solde_restant
+              ]);
+            });
+          });
+
+          // Convertir en chaîne CSV
+          const csv = [
+            headers.join(","), // En-tête
+            ...rows.map(row => row.map(value => `"${value}"`).join(",")) // Lignes de données
+          ].join("\n");
+
+          // Créer un lien pour télécharger le fichier
+          const dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
+          const downloadAnchorNode = document.createElement("a");
+          downloadAnchorNode.setAttribute("href", dataStr);
+          downloadAnchorNode.setAttribute("download", "transactions.csv");
+
+          // Télécharger le fichier
+          document.body.appendChild(downloadAnchorNode);
+          downloadAnchorNode.click();
+          downloadAnchorNode.remove();
+        }
+
+        console.log("width: ", width);
+        success_transactions = [];
+        error_transactions = [];
+     
+        // Récupérer et afficher le contenu de resultat_transactions.json
+        const testSum =  document.getElementById('testSum');
+        const successTransaction = document.getElementById('successTransaction');
+        const failedTransaction = document.getElementById('failedTransaction');
+        var valueSuccess = 0;
+        var valueFailed = 0;
+        var success = false;
+        var failed = false;
+        new Promise((resolve, reject) => {
+          fetch('http://localhost:5000/history_success_transaction.json')
+          .then(response => response.json())
+          .then(data => {
+            console.log(data.data.length);
+              valueSuccess = data.data.length;
+              success = true;
+              console.log("valueSuccess: ", success);
+              if(failed){
+                  resolve();
+              }
+          })
+          .catch(error => console.error('Erreur:', error));
+  
+          fetch('http://localhost:5000/history_error_transaction.json')
+          .then(response => response.json())
+          .then(data => {
+            console.log(data.data.length);
+            valueFailed = data.data.length;
+            failed = true;
+            console.log("valueFailed: ", failed);
+            if(success){
+                resolve();
+            }
+          })
+          .catch(error => console.error('Erreur:', error));
+          }).then(()=>{
+            console.log("valueSuccess: ", valueSuccess);
+            console.log("valueFailed: ", valueFailed);
+            testSum.innerHTML = valueFailed + valueSuccess;
+            successTransaction.innerHTML = valueSuccess;
+            failedTransaction.innerHTML = valueFailed;
+          })
+       </script>
+      <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+      <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    </body>
+  </html>

@@ -1,0 +1,238 @@
+{
+    "data": [
+        {
+            "solde_initial": 1500.0,
+            "transactions": {
+                "transaction1": [
+                    {
+                        "transaction": "+345,00",
+                        "type": "credit",
+                        "solde_restant": 1845.0
+                    },
+                    {
+                        "transaction": "-460,00",
+                        "type": "debit",
+                        "solde_restant": 1385.0
+                    },
+                    {
+                        "transaction": "-80,50",
+                        "type": "debit",
+                        "solde_restant": 1304.5
+                    }
+                ],
+                "transaction2": [
+                    {
+                        "transaction": "-25,80",
+                        "type": "debit",
+                        "solde_restant": 1278.7
+                    },
+                    {
+                        "transaction": "-78,60",
+                        "type": "debit",
+                        "solde_restant": 1200.1000000000001
+                    },
+                    {
+                        "transaction": "-67,90",
+                        "type": "debit",
+                        "solde_restant": 1132.2
+                    }
+                ]
+            }
+        },
+        {
+            "solde_initial": 1500.0,
+            "transactions": {
+                "transaction1": [
+                    {
+                        "transaction": "+345,00",
+                        "type": "credit",
+                        "solde_restant": 1845.0
+                    },
+                    {
+                        "transaction": "-460,00",
+                        "type": "debit",
+                        "solde_restant": 1385.0
+                    },
+                    {
+                        "transaction": "-80,50",
+                        "type": "debit",
+                        "solde_restant": 1304.5
+                    }
+                ],
+                "transaction2": [
+                    {
+                        "transaction": "-25,80",
+                        "type": "debit",
+                        "solde_restant": 1278.7
+                    },
+                    {
+                        "transaction": "-78,60",
+                        "type": "debit",
+                        "solde_restant": 1200.1000000000001
+                    },
+                    {
+                        "transaction": "-67,90",
+                        "type": "debit",
+                        "solde_restant": 1132.2
+                    }
+                ]
+            }
+        },
+        {
+            "solde_initial": 1500.0,
+            "transactions": {
+                "transaction1": [
+                    {
+                        "transaction": "+345,00",
+                        "type": "credit",
+                        "solde_restant": 1845.0
+                    },
+                    {
+                        "transaction": "-460,00",
+                        "type": "debit",
+                        "solde_restant": 1385.0
+                    },
+                    {
+                        "transaction": "-80,50",
+                        "type": "debit",
+                        "solde_restant": 1304.5
+                    }
+                ],
+                "transaction2": [
+                    {
+                        "transaction": "-25,80",
+                        "type": "debit",
+                        "solde_restant": 1278.7
+                    },
+                    {
+                        "transaction": "-78,60",
+                        "type": "debit",
+                        "solde_restant": 1200.1000000000001
+                    },
+                    {
+                        "transaction": "-67,90",
+                        "type": "debit",
+                        "solde_restant": 1132.2
+                    }
+                ]
+            }
+        },
+        {
+            "solde_initial": 1500.0,
+            "transactions": {
+                "transaction1": [
+                    {
+                        "transaction": "+345,00",
+                        "type": "credit",
+                        "solde_restant": 1845.0
+                    },
+                    {
+                        "transaction": "-460,00",
+                        "type": "debit",
+                        "solde_restant": 1385.0
+                    },
+                    {
+                        "transaction": "-80,50",
+                        "type": "debit",
+                        "solde_restant": 1304.5
+                    }
+                ],
+                "transaction2": [
+                    {
+                        "transaction": "-25,80",
+                        "type": "debit",
+                        "solde_restant": 1278.7
+                    },
+                    {
+                        "transaction": "-78,60",
+                        "type": "debit",
+                        "solde_restant": 1200.1000000000001
+                    },
+                    {
+                        "transaction": "-67,90",
+                        "type": "debit",
+                        "solde_restant": 1132.2
+                    }
+                ]
+            }
+        },
+        {
+            "solde_initial": 1500.0,
+            "transactions": {
+                "transaction1": [
+                    {
+                        "transaction": "+345,00",
+                        "type": "credit",
+                        "solde_restant": 1845.0
+                    },
+                    {
+                        "transaction": "-460,00",
+                        "type": "debit",
+                        "solde_restant": 1385.0
+                    },
+                    {
+                        "transaction": "-80,50",
+                        "type": "debit",
+                        "solde_restant": 1304.5
+                    }
+                ],
+                "transaction2": [
+                    {
+                        "transaction": "-25,80",
+                        "type": "debit",
+                        "solde_restant": 1278.7
+                    },
+                    {
+                        "transaction": "-78,60",
+                        "type": "debit",
+                        "solde_restant": 1200.1000000000001
+                    },
+                    {
+                        "transaction": "-67,90",
+                        "type": "debit",
+                        "solde_restant": 1132.2
+                    }
+                ]
+            }
+        },
+        {
+            "solde_initial": 1500.0,
+            "transactions": {
+                "transaction1": [
+                    {
+                        "transaction": "+345,00",
+                        "type": "credit",
+                        "solde_restant": 1845.0
+                    },
+                    {
+                        "transaction": "-460,00",
+                        "type": "debit",
+                        "solde_restant": 1385.0
+                    },
+                    {
+                        "transaction": "-80,50",
+                        "type": "debit",
+                        "solde_restant": 1304.5
+                    }
+                ],
+                "transaction2": [
+                    {
+                        "transaction": "-25,80",
+                        "type": "debit",
+                        "solde_restant": 1278.7
+                    },
+                    {
+                        "transaction": "-78,60",
+                        "type": "debit",
+                        "solde_restant": 1200.1000000000001
+                    },
+                    {
+                        "transaction": "-67,90",
+                        "type": "debit",
+                        "solde_restant": 1132.2
+                    }
+                ]
+            }
+        }
+    ]
+}
