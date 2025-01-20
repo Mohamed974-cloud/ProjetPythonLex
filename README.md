@@ -6,24 +6,47 @@ Ce document décrit la structure du projet Flask.
 
 ## Arborescence des fichiers
 <pre>
-plaintext . 
-├── app/
-│ ├── init.py
-│ ├── routes.py 
-│ ├── models.py
-│ ├── templates/
-│ │ ├── base.html
-│ │ ├── index.html
-│ │ ├── upload.html
-│ ├── static/
-│ │ ├── css/
-│ │ │ ├── styles.css
-│ │ ├── js/
-│ │ │ ├── scripts.js
-├── venv/
-├── requirements.txt
-├── config.py
-├── run.py
+├── app
+│   ├── bank_file_checker.py          //fichier contenant les methodes pour l'analyse lexicale
+│   ├── __init__.py                   //fichier contenant la methode qui instancie l'application
+│   ├── __pycache__
+│   │   ├── bank_file_checker.cpython-312.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   │   └── routes.cpython-312.pyc
+│   └── routes.py                      //fichier contenant les routes de l'application
+├── app.py
+├── config.py                          //fichier de configuration
+├── data
+│   ├── error_lex.json                   //fichier qui stocke les erreurs dans une analyse lexicale
+│   ├── history_error_transaction.json     //fichier qui stocke l'hystorique des analyses echouees
+│   ├── history_success_transaction.json   //fichier qui stocke le l'historique resultat des analyses reussies
+│   └── resultat_transactions.json          //fichier qui stocke le resultat d'une analyse reussie
+├── Lexer_logo_teal.png                     //le logo de notre application
+├── README.md                             //la documentation de notre application
+├── requirements.txt                      //fichier qui contient toutes les dependances de l'application
+├── run.py                                //fichier qui cree notre application
+├── static                                 //Dossier contenant les donnees statiques de notre application
+│   ├── bootstrap.min.css
+│   ├── diedhiou.webp
+│   ├── items.jpg
+│   ├── laity.jpg
+│   ├── mohamed.jpg
+│   ├── notif.mp3
+│   └── styles.css
+├── templates                       //Dossier contenant les differentes pages de notre application
+│   ├── error_transaction.html
+│   ├── success_transaction.html
+│   └── upload.html
+├── tests                         //Dossier de test
+│   └── test_routes.py
+└── uploads                        //Dossier complementaire servant d'stockage pour notre application
+    ├── INCOHERENTS__transaction.txt
+    ├── INVALIDE__SYNTAXEtransaction.txt
+    ├── items.jpg
+    ├── mohamed.jpg
+    ├── pageParametre.txt
+    ├── tools.png
+    └── VALIDE__transaction.txt
 </pre>
 ## Description des fichiers et dossiers
 
@@ -66,7 +89,7 @@ plaintext .
 ```
 4. Lancer l'application
 ```bash
-   python run.py
+   python app.py
 ```
 
 #### Utilisation
