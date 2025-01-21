@@ -94,7 +94,35 @@ Ce document décrit la structure du projet Flask.
 
 #### Utilisation
   -**Accédez à l'application via ```http://localhost:5000/```.**
-  -**Utilisez la barre de navigation pour accéder aux différentes sections de l'application.**
+  -**Utilisez la barre 
+￼
+Workspace
+10 références utilisées
+Collecte des informations sur l’espace de travail
+
+Voici une suggestion pour le contenu de vos diapositives :
+
+Diapositive 1 : Titre
+Titre du projet : Analyseur de Transactions Bancaires
+Sous-titre : Présentation du projet
+Nom du présentateur : [Votre Nom]
+Diapositive 2 : Introduction
+Objectif du projet : Analyser les fichiers de transactions bancaires et calculer les soldes.
+Technologies utilisées : Flask, Python, HTML, CSS, JavaScript
+Diapositive 3 : Structure du Projet
+Arborescence des fichiers :
+app : Code source de l'application
+data : Fichiers JSON de résultats et historiques
+static : Fichiers statiques (CSS, images)
+templates : Fichiers HTML
+uploads : Fichiers de transactions
+Diapositive 4 : Fonctionnalités Principales
+Téléchargement de fichiers de transactions
+Analyse lexicale des transactions
+Calcul des soldes
+Affichage des résultats et des erreurs
+Diapositive 5 : Routes de l'Application
+de navigation pour accéder aux différentes sections de l'application.**
 
 
 
@@ -160,6 +188,48 @@ Ce fichier décrit les différentes routes définies dans le fichier `routes.py`
 
 #### `/favicon.ico`
 
+Diapositive 1 : Titre
+Titre du projet : Analyseur de Transactions Bancaires
+Sous-titre : Présentation du projet
+Nom du présentateur : [Votre Nom]
+Diapositive 2 : Introduction
+Objectif du projet : Analyser les fichiers de transactions bancaires et calculer les soldes.
+Technologies utilisées : Flask, Python, HTML, CSS, JavaScript
+Diapositive 3 : Structure du Projet
+Arborescence des fichiers :
+app : Code source de l'application
+data : Fichiers JSON de résultats et historiques
+static : Fichiers statiques (CSS, images)
+templates : Fichiers HTML
+uploads : Fichiers de transactions
+Diapositive 4 : Fonct
+Diapositive 1 : Titre
+Titre du projet : Analyseur de Transactions Bancaires
+Sous-titre : Présentation du projet
+Nom du présentateur : [Votre Nom]
+Diapositive 2 : Introduction
+Objectif du projet : Analyser les fichiers de transactions bancaires et calculer les soldes.
+Technologies utilisées : Flask, Python, HTML, CSS, JavaScript
+Diapositive 3 : Structure du Projet
+Arborescence des fichiers :
+app : Code source de l'application
+data : Fichiers JSON de résultats et historiques
+static : Fichiers statiques (CSS, images)
+templates : Fichiers HTML
+uploads : Fichiers de transactions
+Diapositive 4 : Fonctionnalités Principales
+Téléchargement de fichiers de transactions
+Analyse lexicale des transactions
+Calcul des soldes
+Affichage des résultats et des erreurs
+Diapositive 5 : Routes de l'Application
+ionnalités Principales
+Téléchargement de fichiers de transactions
+Analyse lexicale des transactions
+Calcul des soldes
+Affichage des résultats et des erreurs
+Diapositive 5 : Routes de l'Application
+
 - **Méthode :** GET
 - **Description :** Renvoie le fichier de l'icône du site.
 - **Fichier :** `Lexer_logo_teal.png`
@@ -200,7 +270,7 @@ Ce fichier contient les fonctions et les définitions nécessaires pour analyser
   - `t` : Le token d'erreur.
 - **Retour :** Aucun.
 
-### `calculate_balance(filename)`
+### `process_bank_data(filename)`
 
 - **Description :** Lit le fichier de transactions et calcule le solde.
 - **Paramètres :**
@@ -215,17 +285,17 @@ Le lexer est construit en utilisant `ply.lex` et est configuré pour analyser le
 
 ```python
 
-from bank_file_checker import calculate_balance
+from bank_file_checker import process_bank_data
 
-result = calculate_balance('path/to/transaction/file.txt')
+result = process_bank_data('path/to/transaction/file.txt')
 print(result)
 ```
 
 
 
-### Détails de la fonction `calculate_balance`
+### Détails de la fonction `process_bank_data`
 
-La fonction `calculate_balance` lit le contenu d'un fichier de transactions et utilise un lexer pour analyser les transactions et calculer le solde. Voici les étapes principales :
+La fonction `process_bank_data` lit le contenu d'un fichier de transactions et utilise un lexer pour analyser les transactions et calculer le solde. Voici les étapes principales :
 
 1. **Lecture du fichier :** Le contenu du fichier est lu et passé au lexer.
 2. **Initialisation :** Le solde initial est défini à 0.0 et une liste de transactions est créée.

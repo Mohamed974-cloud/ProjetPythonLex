@@ -20,8 +20,8 @@ t_DEBIT = r'-\d+,\d{2}'
 t_COMMENT = r'\#.*'
 t_SEPARATOR = r'[-]{17}'
 
-# Ignorer les espaces
-t_ignore = ' \t'
+# Ignorer les espaces et les retours a la ligne
+t_ignore = ' \t\n'
 
 def find_column(input_text, token):
     line_start = input_text.rfind('\n', 0, token.lexpos) + 1
@@ -71,7 +71,7 @@ lexer = lex.lex()
 
 
 # Fonction pour lire le fichier et calculer le solde
-def calculate_balance(filename):
+def process_bank_data(filename):
     if isinstance(filename, FileStorage):
         content = filename.read().decode('utf-8')
     else:

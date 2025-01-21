@@ -13,7 +13,7 @@ def upload_transaction_file():
     if 'file' not in request.files:
         return render_template('upload.html', response="Aucun fichier sélectionné")
     file = request.files['file']
-    return render_template('upload.html',result=[ {"result":check_transaction.calculate_balance(file)}, {"name": name}])
+    return render_template('upload.html',result=[ {"result":check_transaction.process_bank_data(file)}, {"name": name}])
     
 @main.route('/resultat_transactions.json', methods=['GET'])
 def get_resultat_transactions():

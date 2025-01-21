@@ -1,6 +1,6 @@
-:1500,00
+:15500,00
 +345,00  #virement compte épargne
--460,00   #reparation voiture
+-460,00            #reparat     ion voiture
 -80,50
 -----------------
 -25,80     #repas

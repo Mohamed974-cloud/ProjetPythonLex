@@ -35,7 +35,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link"
-                href="http://localhost:5000/success-transaction">Transactions
+                href="http://localhost:5000/success-transaction">Opérations
                 réuissies </a>
             </li>
             <li class="nav-item dropdown">
@@ -55,7 +55,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link"
-                href="http://localhost:5000/error-transaction">Transaction
+                href="http://localhost:5000/error-transaction">Opérations
                 échouées</a>
             </li>
           </ul>
@@ -63,7 +63,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
               role="button" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
-              Voir les membres du projet
+              Les membres du projet
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="btn cursor-pointer dropdown-item" id="introMemberDiedhiou" data-toggle="modal" data-target="#showdiedhiouModal"
@@ -81,9 +81,9 @@
       </nav>
       <div class="nav">
         <div class="card w-100 p-2 mt-3 mb-3">
-          <div><h2 class="text-primary">Transactions bancaire</h2></div>
+          <div><h2 class="text-primary">OPERATIONS BANCAIRES</h2></div>
           <small class="text-secondary">Analyser et obtenir les résultats de vos
-            transactions</small>
+            opérations bancaires</small>
         </div>
       </div>
       {% if result and result[0] and result[0].result == 'error' %}
@@ -106,7 +106,7 @@
         <div class="container">
 
           <h5 class="card-title
-             ">Statistiques des transactions</h5>
+             ">Statistiques des opérations</h5>
           <div class="container">
             <div class="row">
               <div class="col-6">
@@ -276,9 +276,9 @@
         <table class="table table-white table-striped">
           <thead>
             <tr>
-              <th>Type de Transaction</th>
               <th>Transaction</th>
-              <th>Type</th>
+              <th>Montant</th>
+              <th>Type d'opération</th>
               <th>Solde Restant</th>
             </tr>
           </thead>
@@ -348,11 +348,11 @@
           <div class="container">
             <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                    <img src="{{url_for('static', filename='/laity.jpg')}}" 
-                         class="rounded-circle" 
-                         alt="Jule Fery" 
-                         width="200" 
-                         height="200">
+                    <img src="{{url_for('static', filename='/laity.jpeg')}}" 
+                    class="rounded-circle" 
+                    alt="Photo Mohamed NDOYE" 
+                    width="200"
+                    style="aspect-ratio: 1/1; object-fit: cover;">
                 </div>
                 <div class="col-12">
                     <span class="text-center w-100 badge badge-primary">Laity FAYE</span>
@@ -381,10 +381,11 @@
           <div class="container">
             <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                    <img src="{{url_for('static', filename='diedhiou.webp')}}" 
-                         class="rounded-circle" 
-                         alt="Jule Fery" 
-                         width="200">
+                    <img src="{{url_for('static', filename='diedhiou2.jpeg')}}" 
+                    class="rounded-circle" 
+                    alt="Photo Mohamed NDOYE" 
+                    width="200"
+                    style="aspect-ratio: 1/1; object-fit: cover;">
                 </div>
                 <div class="col-12">
                     <span class="text-center text-1 w-100 badge badge-primary">Thierno DIEDHIOU</span>
